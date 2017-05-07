@@ -1,13 +1,13 @@
 package at.gv.ooe.ietservice.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by alexandervollovec on 07/05/2017.
  */
+@NamedQueries({
+        @NamedQuery(name = "Ticket.findAll", query = "select t from Ticket t")
+})
 @Entity
 public class Ticket {
     @Id

@@ -1,29 +1,35 @@
-Starten des Containers:
+## Starten des Containers:
 
 docker pull mariadb
 
 docker run --name iet_mariadb -e MYSQL_ROOT_PASSWORD=passme -d -v ~/docker/data/mysql:/var/lib/mysql -p 4306:3306 mariadb:latest
 
-Stoppen des Containers
+## Stoppen des Containers
 docker stop iet_mariadb
 
-Welche Container haben wir
+## Welche Container haben wir
 docker ps
 auch die gestoppten Container werden angezeigt: docker ps -a 
 
-Container löschen
+## Container löschen
 docker rm iet_mariadb
 
-Images anzeigen 
+## Images anzeigen
 docker images
 
-Logs anzeigen
+## Logs anzeigen
 docker logs iet_mariadb
 
-
+## Container build
 docker build -t ooe/iet_service:latest .
 
-docker run -e MYSQL_USER=root -e MYSQL_PASSWORD=passme -e MYSQL_DATABASE=testdb --link iet_mariadb:mysql_container -p 8080:8080 -p 9990:9990 ooe/iet_service
+## Container run
+docker run --name iet_service -e MYSQL_USER=root -e MYSQL_PASSWORD=passme -e MYSQL_DATABASE=testdb --link iet_mariadb:mysql_container -p 8080:8080 -p 9990:9990 ooe/iet_service
+
+## Container stoppen und löschen
+docker stop iet_service && docker rm iet_service
+
+
 
 ## Ergebnisse testen
 curl http://localhost:8080/ietservice/rs

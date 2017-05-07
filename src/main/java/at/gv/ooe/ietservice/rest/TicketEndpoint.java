@@ -1,8 +1,10 @@
 package at.gv.ooe.ietservice.rest;
 
+import at.gv.ooe.ietservice.business.TicketFacade;
 import at.gv.ooe.ietservice.entity.Ticket;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
@@ -21,10 +23,10 @@ import java.util.List;
  */
 @Path("")
 @Stateless
-public class IetEndpoint {
+public class TicketEndpoint {
 
-    @PersistenceContext
-    EntityManager em;
+    @Inject
+    TicketFacade ticketFacade;
 
     @GET
     public JsonObject hello() {
@@ -32,12 +34,9 @@ public class IetEndpoint {
     }
 
     @GET
-    @Path("ticket")
+    @Path("tickets")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Ticket> getTickets() {
-
-        TypedQuery<Ticket> query = em.createQuery("select t from Ticket t", Ticket.class);
-        return query.getResultList();
-
+        return ticketFacade.findAll();
     }
 }
