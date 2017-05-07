@@ -34,7 +34,8 @@ docker ps && docker stop iet_mariadb && docker rm iet_mariadb
 
 ## Ergebnisse testen
 curl http://localhost:8080/ietservice/rs
-curl http://localhost:8080/ietservice/rs/ticket
+curl http://localhost:8080/ietservice/rs/tickets
+curl -X GET -H "Accept: application/json" http://localhost:8080/ietservice/rs/tickets
 
 
 
