@@ -27,7 +27,8 @@ docker build -t ooe/iet_service:latest .
 docker run --name iet_service -e MYSQL_USER=root -e MYSQL_PASSWORD=passme -e MYSQL_DATABASE=testdb --link iet_mariadb:mysql_container -p 8080:8080 -p 9990:9990 ooe/iet_service
 
 ## Container stoppen und löschen
-docker stop iet_service && docker rm iet_service
+docker ps && docker stop iet_service && docker rm iet_service
+docker ps && docker stop iet_mariadb && docker rm iet_mariadb
 
 
 
