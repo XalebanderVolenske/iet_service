@@ -12,6 +12,10 @@ Im Tab "Maven Projects" - Lifecycle - install
 ![Maven install](images/mvn_install.png)
 
 ## Erstellen des Images für den RESTful-Service
+ACHTUNG: ins Verzeichnis mit dem ```Dockerfile``` wechseln! 
+
+Bei Verwendung von IntelliJ ist man beim Öffnen des Terminals im richtigen Verzeichnis
+
 docker build -t ooe/iet_service:latest .
 
 ## Starten des RESTful-Services (JBoss Wildfly)
@@ -66,6 +70,8 @@ docker ps && docker stop iet_mariadb && docker rm iet_mariadb
 
 docker ps && docker stop iet_service && docker rm iet_service
 
+## Auf admin-Konsole des Wildfly zugreifen
+im Browser: http://localhost:9990
 
 
 ## Ergebnisse testen
