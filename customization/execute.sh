@@ -52,6 +52,7 @@ run-batch
 EOF
 
 # Deploy the WAR
+echo "=> Deploy the WAR"
 cp /opt/jboss/wildfly/customization/ietservice.war $JBOSS_HOME/$JBOSS_MODE/deployments/ietservice.war
 
 echo "=> Shutting down WildFly"

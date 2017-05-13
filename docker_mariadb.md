@@ -7,9 +7,13 @@ docker ps
 docker run --name iet_mariadb -e MYSQL_ROOT_PASSWORD=passme -d -v ~/docker/data/mysql:/var/lib/mysql -p 4306:3306 mariadb:latest
 
 ## Programmcode ändern
-Im Tab "Maven Projects" - Lifecycle - install
+Im Tab "Maven Projects" - Lifecycle - install 
 
 ![Maven install](images/mvn_install.png)
+
+besser: direkt maven aufrufen
+Vorbedingung: download von Maven https://maven.apache.org/download.cgi
+zB: /opt/apache-maven/bin/mvn clean install && docker build -t ooe/iet_service:latest .
 
 ## Erstellen des Images für den RESTful-Service
 ACHTUNG: ins Verzeichnis mit dem ```Dockerfile``` wechseln! 
@@ -17,6 +21,9 @@ ACHTUNG: ins Verzeichnis mit dem ```Dockerfile``` wechseln!
 Bei Verwendung von IntelliJ ist man beim Öffnen des Terminals im richtigen Verzeichnis
 
 docker build -t ooe/iet_service:latest .
+
+## Images löschen
+docker rmi ooe/iet_service
 
 ## Starten des RESTful-Services (JBoss Wildfly)
 docker run --name iet_service -e MYSQL_USER=root -e MYSQL_PASSWORD=passme -e MYSQL_DATABASE=testdb --link iet_mariadb:mysql_container -p 8080:8080 -p 9990:9990 ooe/iet_service
