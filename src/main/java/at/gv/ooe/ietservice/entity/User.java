@@ -20,12 +20,17 @@ public class User
     private String persno;
     private String name;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    private
+    Department department;
+
     public User() {
     }
 
-    public User(String persno, String name) {
-        this.persno = persno;
-        this.name = name;
+    public User(String persno, String name, Department department) {
+        this.setPersno(persno);
+        this.setName(name);
+        this.setDepartment(department);
     }
 
     public String getPersno() {
@@ -42,6 +47,14 @@ public class User
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     @Override

@@ -24,5 +24,4 @@ public class TicketFacade {
         return em.createNamedQuery("Ticket.findAll", Ticket.class).getResultList();
     }
 
-
 }

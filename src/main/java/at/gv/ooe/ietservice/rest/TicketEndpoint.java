@@ -1,6 +1,8 @@
 package at.gv.ooe.ietservice.rest;
 
+import at.gv.ooe.ietservice.business.DepartmentFacade;
 import at.gv.ooe.ietservice.business.TicketFacade;
+import at.gv.ooe.ietservice.entity.Department;
 import at.gv.ooe.ietservice.entity.Ticket;
 
 import javax.ejb.Stateless;
@@ -29,14 +31,10 @@ public class TicketEndpoint {
     TicketFacade ticketFacade;
 
     @GET
-    public JsonObject hello() {
-        return Json.createObjectBuilder().add("greeting","hello").build();
-    }
-
-    @GET
     @Path("tickets")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Ticket> getTickets() {
         return ticketFacade.findAll();
     }
+
 }

@@ -1,6 +1,7 @@
 package at.gv.ooe.ietservice.business;
 
 import at.gv.ooe.ietservice.entity.DiaryEntry;
+import at.gv.ooe.ietservice.entity.Ticket;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -20,7 +21,7 @@ public class DiaryEntryFacade {
         return em.merge(entry);
     }
 
-    public List<DiaryEntry> findAllForTicket() {
-        return em.createNamedQuery("DiaryEntry.findAllForTicket", DiaryEntry.class).getResultList();
+    public List<DiaryEntry> getDiaryEntriesForTicket(Long ticketID) {
+        return em.createNamedQuery("DiaryEntry.getDiaryEntriesForTicket", DiaryEntry.class).setParameter("ticketID", ticketID).getResultList();
     }
 }

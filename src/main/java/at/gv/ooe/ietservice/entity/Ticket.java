@@ -1,8 +1,11 @@
 package at.gv.ooe.ietservice.entity;
 
 import javax.persistence.*;
+import at.gv.ooe.ietservice.entity.DiaryEntry;
+
+import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Created by alexandervollovec on 07/05/2017.
@@ -26,29 +29,46 @@ public class Ticket {
     private String problemUserName;
     private String priority;
     private String solution;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<DiaryEntry> diaryEntries = diaryEntries = new ArrayList<>();
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private
+    User user;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private
+    ConfigurationItem ci;
 
     public Ticket() {
     }
 
-    public Ticket(String description, String startDate, String answerDate,
-                  String closedDate, String status, String specialistName,
-                  String problemUserName, String priority, String solution) {
+    public Ticket(String description, String startDate, String answerDate, String closedDate, String status, String specialistName, String problemUserName, String priority, String solution, User user, ConfigurationItem ci) {
         this.description = description;
-        this.setStartDate(startDate);
-        this.setAnswerDate(answerDate);
-        this.setClosedDate(closedDate);
-        this.setStatus(status);
-        this.setSpecialistName(specialistName);
-        this.setProblemUserName(problemUserName);
-        this.setPriority(priority);
-        this.setSolution(solution);
-        diaryEntries = new ArrayList<>();
+        this.startDate = startDate;
+        this.answerDate = answerDate;
+        this.closedDate = closedDate;
+        this.status = status;
+        this.specialistName = specialistName;
+        this.problemUserName = problemUserName;
+        this.priority = priority;
+        this.solution = solution;
+        this.user = user;
+        this.setCi(ci);
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "id=" + getId() +
+                ", description='" + getDescription() + '\'' +
+                '}';
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -123,20 +143,21 @@ public class Ticket {
         this.solution = solution;
     }
 
-    public List<DiaryEntry> getDiaryEntries() {
-        return diaryEntries;
+    public User getUser() {
+        return user;
     }
 
-    public void setDiaryEntries(List<DiaryEntry> diaryEntries) {
-        this.diaryEntries = diaryEntries;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    @Override
-    public String toString() {
-        return "Ticket{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                '}';
+
+    public ConfigurationItem getCi() {
+        return ci;
+    }
+
+    public void setCi(ConfigurationItem ci) {
+        this.ci = ci;
     }
 }
 

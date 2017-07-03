@@ -15,10 +15,11 @@ public class ConfigurationItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private
     Long id;
 
 
-    /* RechenZentrumInFromationsnr.*/
+    /* RechenZentrumINFormationsnr.*/
     private String rZINF;
     private String descirption;
     private String ownerName;
@@ -28,10 +29,14 @@ public class ConfigurationItem {
     private String product;
     private String status;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    private
+    Department department;
+
     public ConfigurationItem() {
     }
 
-    public ConfigurationItem(String rZINF, String descirption, String ownerName, String location, String roomNo, String category, String product, String status) {
+    public ConfigurationItem(String rZINF, String descirption, String ownerName, String location, String roomNo, String category, String product, String status, Department department) {
         this.setrZINF(rZINF);
         this.setDescirption(descirption);
         this.setOwnerName(ownerName);
@@ -39,10 +44,31 @@ public class ConfigurationItem {
         this.setRoomNo(roomNo);
         this.setCategory(category);
         this.setProduct(product);
-        /* Status: in Betrieb, Abgebaut, Ausgeschieden */
         this.setStatus(status);
+        this.setDepartment(department);
     }
 
+    @Override
+    public String toString() {
+        return "ConfigurationItem{" +
+                "rZINF='" + getrZINF() + '\'' +
+                ", descirption='" + getDescirption() + '\'' +
+                ", ownerName='" + getOwnerName() + '\'' +
+                ", location='" + getLocation() + '\'' +
+                ", roomNo='" + getRoomNo() + '\'' +
+                ", category='" + getCategory() + '\'' +
+                ", product='" + getProduct() + '\'' +
+                ", status='" + getStatus() + '\'' +
+                '}';
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getrZINF() {
         return rZINF;
@@ -108,17 +134,11 @@ public class ConfigurationItem {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "ConfigurationItem{" +
-                "rZINF='" + rZINF + '\'' +
-                ", descirption='" + descirption + '\'' +
-                ", ownerName='" + ownerName + '\'' +
-                ", location='" + location + '\'' +
-                ", roomNo='" + roomNo + '\'' +
-                ", category='" + category + '\'' +
-                ", product='" + product + '\'' +
-                ", status='" + status + '\'' +
-                '}';
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }
